@@ -1,0 +1,245 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --glitter: url("https://assets.codepen.io/13471/silver-glitter-background.png");
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: rgb(31, 99, 116);
+}
+
+.container {
+  position: relative;
+  top: 50px;
+}
+
+.pot {
+  position: relative;
+  width: 280px;
+  height: 240px;
+  background: linear-gradient(to right, #121212, #212121);
+  border-bottom-left-radius: 65%;
+  border-bottom-right-radius: 65%;
+  border-top-left-radius: 40%;
+  border-top-right-radius: 40%;
+}
+
+.top {
+  position: absolute;
+  top: -50px;
+  left: 0px;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to right, #121212, #212121);
+  border-radius: 50%;
+}
+
+.circle {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  width: calc(100% - 20px);
+  height: 50px;
+  background: linear-gradient(to left, #121212, #212121);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.soup {
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center bottom,
+    #4a7c23 0%,
+    #2d4a15 100%
+  );
+  border-radius: 50%;
+}
+
+.handle-right {
+  position: absolute;
+  right: -35px;
+  top: 5px;
+  width: 100px;
+  height: 70px;
+  border: 15px solid #121212;
+  border-left: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-radius: 50%;
+  transform: rotate(-60deg);
+  z-index: -1;
+}
+
+.handle-left {
+  position: absolute;
+  left: -35px;
+  top: 5px;
+  width: 100px;
+  height: 70px;
+  border: 15px solid #121212;
+  border-right: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-radius: 50%;
+  transform: rotate(60deg);
+  z-index: -1;
+}
+
+.steam {
+  position: relative;
+  display: flex;
+  z-index: 1;
+  padding: 0px 20px;
+}
+
+.steam span {
+  position: relative;
+  bottom: 50px;
+  display: block;
+  margin: 0px 2px 50px;
+  min-width: 8px;
+  height: 120px;
+  background: #fff;
+  border-radius: 50%;
+  animation: animate 5s linear infinite;
+  opacity: 0;
+  filter: blur(8px);
+  animation-delay: calc(var(--i) * -0.5s);
+}
+
+.bubble-wrapper {
+  position: absolute;
+  display: flex;
+  z-index: 1;
+  left: 12%;
+  top: 45%;
+}
+
+.bubble {
+  position: relative;
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  animation: animate-bubble 3s infinite;
+  animation-delay: calc(var(--i) * -0.3s);
+}
+
+.bubble span {
+  height: 5px;
+  width: 5px;
+  border-radius: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: 20%;
+  right: 20%;
+}
+
+.base {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  min-height: 200px;
+  /* background: #fff; */
+  z-index: -1;
+}
+
+.log-1 {
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background: #bc6a3c;
+  box-shadow: 10px 10px #d17540;
+  transform: rotate(-10deg);
+}
+.log-2 {
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background: #bc6a3c;
+  box-shadow: -10px -10px #d17540;
+  transform: rotate(10deg);
+}
+
+.fire::before,
+.fire::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.fire::before {
+  background-image: var(--glitter), var(--glitter),
+    linear-gradient(
+      0deg,
+      white 0px,
+      #ff8951 5px,
+      #dcbc169c 30%,
+      transparent 70%
+    ),
+    radial-gradient(ellipse at bottom, transparent 30%, black 60%);
+  background-size: 350px 500px, 400px 650px, 100% 100%, 100% 100%;
+  background-blend-mode: hard-light, color-dodge, multiply;
+  background-position: 0px 0px, 0px 0px, var(--gradientPos);
+  background-repeat: repeat, repeat, repeat, no-repeat;
+  mix-blend-mode: color-dodge;
+  filter: brightness(3.7) blur(7px) contrast(6);
+  animation: fire 1.75s linear infinite;
+  box-shadow: inset 0 -40px 50px -60px #63bbc5;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0) scaleX(1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-150px) scaleX(5);
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-300px) scaleX(10);
+  }
+}
+
+@keyframes animate-bubble {
+  0% {
+    transform: scale(0) translateY(0) rotate(70deg);
+  }
+  100% {
+    transform: scale(0.3) translateY(-10px) rotate(360deg);
+  }
+}
+
+@keyframes fire {
+  0% {
+    background-position: center 0px, center 0px, 50% 100%, center center;
+  }
+  100% {
+    background-position: center -500px, center -650px, 50% 100%, center center;
+  }
+}
